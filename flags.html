@@ -331,8 +331,14 @@
 					.querySelector("#btn-new-game")
 					.addEventListener("click", () => {
 						// ...
-						game = new Game();
-						game.run();
+						if (
+							confirm(
+								"Είστε σίγουροι ότι θλελεται να ξεκινήσετε Νέο Παιχνίδι; \n Το σκορ σας θα χαθεί!"
+							)
+						) {
+							game = new Game();
+							game.run();
+						}
 					});
 
 				//event listener to next round button
