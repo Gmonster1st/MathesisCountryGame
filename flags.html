@@ -80,7 +80,10 @@
 
 					do {
 						if (
-							this._neighboursCodes.includes(countryList[index])
+							this._neighboursCodes.includes(
+								countryList[index]
+							) ||
+							this._countryCode === countryList[index]
 						) {
 							index++;
 						} else {
