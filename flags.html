@@ -184,7 +184,6 @@
 					this.getNextCountry().then(() => {
 						Promise.all(this._currentCountry._neighboursState).then(
 							() => {
-								this._newRoundBtn.disabled = true;
 								this._rightMoves = 0;
 								this._wrongMoves = this._currentCountry.neighboursCount;
 								this._round++;
@@ -232,12 +231,16 @@
 									"neighbour"
 								);
 
-								newNeighbour.addEventListener("click", () => {
-									this.neighbourHandler(
-										country,
-										newNeighbour
-									);
-								});
+								newNeighbour.addEventListener(
+									"click",
+									() => {
+										this.neighbourHandler(
+											country,
+											newNeighbour
+										);
+									},
+									{ once: true }
+								);
 
 								let newFlag = this.createNewDiv(
 									country.flag,
@@ -268,7 +271,8 @@
 							this._newRoundBtn.disabled = false;
 							this._overlay.innerHTML =
 								"Μπράβο, Πάμε στον επόμενο γύρο!";
-							this._overlay.style.display = "block";
+							this._overlay.style.color = "black";
+							this._overlay.style.display = "flex";
 						}
 					} else {
 						newNeighbour.classList.add(
@@ -279,9 +283,17 @@
 						if (!this.validateWrongMovesLeft()) {
 							this._overlay.innerHTML =
 								"Δυστηχώς έχασες, Μπορείς να ξεκινήσεις νέο!";
-							this._overlay.style.display = "block";
+							this._overlay.style.color = "red";
+							this._overlay.style.display = "flex";
 						}
 					}
+					// newNeighbour.removeEventListener(
+					// 	"click",
+					// 	() => {
+					// 		this.neighbourHandler(country, newNeighbour);
+					// 	},
+					// 	true
+					// );
 				}
 
 				createNewDiv(text, attribute, value) {
@@ -346,6 +358,7 @@
 					.querySelector("#btn-next-round")
 					.addEventListener("click", () => {
 						// ...
+						game._newRoundBtn.disabled = true;
 						game.newRound();
 					});
 			});
