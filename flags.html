@@ -81,9 +81,9 @@
 					do {
 						if (
 							this._neighboursCodes.includes(
-								countryList[index]
+								countryList[index]["code3"]
 							) ||
-							this._countryCode === countryList[index]
+							this._countryCode === countryList[index]["code"]
 						) {
 							index++;
 						} else {
